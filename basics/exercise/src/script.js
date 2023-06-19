@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+import './style.css'
+import gsap from 'gsap'
 const scene = new THREE.Scene();
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
@@ -46,6 +48,9 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height)
 const clock = new THREE.Clock()
+
+// gsap.to(container.position, { duration: 1, delay: 1, y: 2 })
+
 //animation
 const loop = () => {
     const elapsedTime = clock.getElapsedTime();
