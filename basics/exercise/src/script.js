@@ -6,7 +6,7 @@ scene.add(axesHelper)
 //group
 const container = new THREE.Group()
 scene.add(container)
-container.position.set(0, 1, -1)
+container.position.set(0, 0, 0)
 // cubes
 const cube1 = new THREE.Mesh(
     new THREE.BoxGeometry(1, 1, 1),
@@ -27,6 +27,7 @@ const cube3 = new THREE.Mesh(
 )
 cube3.position.set(-1.5, 0, 0)
 container.add(cube3)
+
 //camera
 const sizes = {
     width: 800,
@@ -34,10 +35,7 @@ const sizes = {
 }
 const camera = new THREE.PerspectiveCamera(65, sizes.width / sizes.height);
 camera.position.set(2, 2, 3)
-camera.lookAt(new THREE.Vector3(0, 0, 0))
 scene.add(camera);
-
-
 
 
 //rendering 
@@ -47,5 +45,14 @@ const renderer = new THREE.WebGLRenderer({
     canvas
 });
 renderer.setSize(sizes.width, sizes.height)
-renderer.render(scene, camera)
-
+const clock = new THREE.Clock()
+//animation
+const loop = () => {
+    const elapsedTime = clock.getElapsedTime();
+    camera.position.x = Math.sin(elapsedTime)
+    camera.position.y = Math.cos(elapsedTime)
+    camera.lookAt(container.position)
+    renderer.render(scene, camera)
+    window.requestAnimationFrame(loop);
+}
+loop()
