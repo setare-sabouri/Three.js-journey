@@ -13,20 +13,29 @@ container.position.set(0, 0, 0)
 // cubes
 const cube1 = new THREE.Mesh(
     new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: 'red' })
+    new THREE.MeshBasicMaterial({
+        color: 'red',
+        wireframe: true
+    })
 )
 container.add(cube1)
 
 const cube2 = new THREE.Mesh(
     new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: 'blue' })
+    new THREE.MeshBasicMaterial({
+        color: 'blue',
+        wireframe: true
+    })
 )
 cube2.position.set(1.5, 0, 0)
 container.add(cube2)
 
 const cube3 = new THREE.Mesh(
     new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: '#00ff00' })
+    new THREE.MeshBasicMaterial({
+        color: '#00ff00',
+        wireframe: true
+    })
 )
 cube3.position.set(-1.5, 0, 0)
 container.add(cube3)
