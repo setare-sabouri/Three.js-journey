@@ -1,69 +1,70 @@
 import * as THREE from 'three'
-import './style.css'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-//scene
-const scene = new THREE.Scene();
+/**
+ * Base
+ */
+// Canvas
+const canvas = document.querySelector('canvas.webgl')
+
+// Scene
+const scene = new THREE.Scene()
 const axesHelper = new THREE.AxesHelper(2)
-scene.add(axesHelper)
+// scene.add(axesHelper)
 
-//group
-const container = new THREE.Group()
-scene.add(container)
-container.position.set(0, 0, 0)
+// Object
 
-// cubes
-const cube1 = new THREE.Mesh(
-    new THREE.BoxGeometry(1.8, 1, 1),
-    new THREE.MeshBasicMaterial({
-        color: 'red',
-        wireframe: true
-    })
-)
-container.add(cube1)
+const buffgeometry = new THREE.BufferGeometry()
+const count = 50 // 50ta safhe --- har safhe 3 noghte --- har noghte 3 attr xyz
+const positionsArray = new Float32Array(count * 3 * 3)
 
-const cube2 = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({
-        color: 'blue',
-        wireframe: true
-    })
-)
-cube2.position.set(1.5, 0, 0)
-container.add(cube2)
+for (let i = 0; i < count * 3 * 3; i++) {
+    positionsArray[i] = Math.random()
+}
+const positionsBuffer = new THREE.BufferAttribute(positionsArray, 3)
+buffgeometry.setAttribute('position', positionsBuffer)
+const material = new THREE.MeshBasicMaterial({
+    color: 0x0000ff,
+    wireframe: true
+})
+const mesh = new THREE.Mesh(buffgeometry, material)
+scene.add(mesh)
 
-const cube3 = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1, 2, 2, 2),
-    new THREE.MeshBasicMaterial({
-        color: '#00ff00',
-        wireframe: true
-    })
-)
-cube3.position.set(-1.5, 0, 0)
-container.add(cube3)
-
-//camera
+// Sizes
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000);
-camera.position.set(0, 2, 2)
-scene.add(camera);
 
+window.addEventListener('resize', () => {
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
 
-//rendering 
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
 
-const canvas = document.querySelector('.webgl');
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
 
+// Camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+camera.position.set(0, 0, 3)
+scene.add(camera)
+
+// Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+
+// RendererE
 const renderer = new THREE.WebGLRenderer({
-    canvas
-});
+    canvas: canvas
+})
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-const clock = new THREE.Clock()
 
 //responsiveness
 
@@ -96,12 +97,14 @@ window.addEventListener('dblclick', () => {
         }
     }
 })
+// Animate
+const clock = new THREE.Clock()
 
-//animation
 const loop = () => {
-    // camera.lookAt(container.position)
+    const elapsedTime = clock.getElapsedTime()
     controls.update()
     renderer.render(scene, camera)
-    window.requestAnimationFrame(loop);
+    window.requestAnimationFrame(loop)
 }
+
 loop()
