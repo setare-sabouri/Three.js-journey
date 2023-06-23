@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 
-
+const gui = new dat.GUI()
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -12,23 +12,30 @@ const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
 // Object blue
-const BlueBuffgeometry = new THREE.BufferGeometry()
-const BlueMaterial = new THREE.MeshBasicMaterial({
+const blueBuffgeometry = new THREE.BufferGeometry()
+const blueMaterial = new THREE.MeshBasicMaterial({
     color: 0x0000ff,
     wireframe: true
 })
 const count = 50 // 50ta safhe --- har safhe 3 noghte --- har noghte 3 attr xyz
-const BluepositionsArray = new Float32Array(count * 3 * 3)
+const bluepositionsArray = new Float32Array(count * 3 * 3)
 
 for (let i = 0; i < count * 3 * 3; i++) {
-    BluepositionsArray[i] = (Math.random() - 0.5) * 4
+    bluepositionsArray[i] = (Math.random() - 0.5) * 4
 }
-const positionsBuffer = new THREE.BufferAttribute(BluepositionsArray, 3)
+const bluepositionsBuffer = new THREE.BufferAttribute(bluepositionsArray, 3)
 
-BlueBuffgeometry.setAttribute('position', positionsBuffer)
+blueBuffgeometry.setAttribute('position', bluepositionsBuffer)
 
-const Bluemesh = new THREE.Mesh(BlueBuffgeometry, BlueMaterial)
-scene.add(Bluemesh)
+const bluemesh = new THREE.Mesh(blueBuffgeometry, blueMaterial)
+scene.add(bluemesh)
+
+//Debug Blue object
+
+gui.add(bluemesh.position, 'y')
+    .min(-2)
+    .max(2)
+    .step(0.1)
 
 // Object Red
 const RedBuffGeometry = new THREE.BufferGeometry()
@@ -43,8 +50,15 @@ for (let i = 0; i < count * 3 * 3; i++) {
 }
 const redPositionsBuffer = new THREE.BufferAttribute(redPositionsArray, 3)
 RedBuffGeometry.setAttribute('position', redPositionsBuffer)
-const RedMesh = new THREE.Mesh(RedBuffGeometry, RedMaterial)
-scene.add(RedMesh)
+const redMesh = new THREE.Mesh(RedBuffGeometry, RedMaterial)
+scene.add(redMesh)
+
+//Debug red object
+
+gui.add(redMesh.position, 'x')
+    .min(-2)
+    .max(2)
+    .step(0.1)
 
 // Sizes
 const sizes = {
@@ -115,12 +129,14 @@ window.addEventListener('dblclick', () => {
 })
 // Animate
 const clock = new THREE.Clock()
-
 const loop = () => {
     const elapsedTime = clock.getElapsedTime()
     controls.update()
     renderer.render(scene, camera)
     window.requestAnimationFrame(loop)
 }
+
+//Debug
+
 
 loop()
