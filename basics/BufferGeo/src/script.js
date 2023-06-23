@@ -1,34 +1,50 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'dat.gui'
 
-/**
- * Base
- */
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
 const axesHelper = new THREE.AxesHelper(2)
-// scene.add(axesHelper)
+scene.add(axesHelper)
 
-// Object
-
-const buffgeometry = new THREE.BufferGeometry()
-const count = 50 // 50ta safhe --- har safhe 3 noghte --- har noghte 3 attr xyz
-const positionsArray = new Float32Array(count * 3 * 3)
-
-for (let i = 0; i < count * 3 * 3; i++) {
-    positionsArray[i] = Math.random()
-}
-const positionsBuffer = new THREE.BufferAttribute(positionsArray, 3)
-buffgeometry.setAttribute('position', positionsBuffer)
-const material = new THREE.MeshBasicMaterial({
+// Object blue
+const BlueBuffgeometry = new THREE.BufferGeometry()
+const BlueMaterial = new THREE.MeshBasicMaterial({
     color: 0x0000ff,
     wireframe: true
 })
-const mesh = new THREE.Mesh(buffgeometry, material)
-scene.add(mesh)
+const count = 50 // 50ta safhe --- har safhe 3 noghte --- har noghte 3 attr xyz
+const BluepositionsArray = new Float32Array(count * 3 * 3)
+
+for (let i = 0; i < count * 3 * 3; i++) {
+    BluepositionsArray[i] = (Math.random() - 0.5) * 4
+}
+const positionsBuffer = new THREE.BufferAttribute(BluepositionsArray, 3)
+
+BlueBuffgeometry.setAttribute('position', positionsBuffer)
+
+const Bluemesh = new THREE.Mesh(BlueBuffgeometry, BlueMaterial)
+scene.add(Bluemesh)
+
+// Object Red
+const RedBuffGeometry = new THREE.BufferGeometry()
+const RedMaterial = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe: true
+})
+const redPositionsArray = new Float32Array(count * 3 * 3)
+for (let i = 0; i < count * 3 * 3; i++) {
+    redPositionsArray[i] = (Math.random() - 0.5) * 3
+
+}
+const redPositionsBuffer = new THREE.BufferAttribute(redPositionsArray, 3)
+RedBuffGeometry.setAttribute('position', redPositionsBuffer)
+const RedMesh = new THREE.Mesh(RedBuffGeometry, RedMaterial)
+scene.add(RedMesh)
 
 // Sizes
 const sizes = {
