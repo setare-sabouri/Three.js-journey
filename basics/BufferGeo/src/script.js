@@ -21,7 +21,7 @@ const count = 50 // 50ta safhe --- har safhe 3 noghte --- har noghte 3 attr xyz
 const bluepositionsArray = new Float32Array(count * 3 * 3)
 
 for (let i = 0; i < count * 3 * 3; i++) {
-    bluepositionsArray[i] = (Math.random() - 0.5) * 4
+    bluepositionsArray[i] = (Math.random() - 0.5) * 2
 }
 const bluepositionsBuffer = new THREE.BufferAttribute(bluepositionsArray, 3)
 
@@ -31,11 +31,21 @@ const bluemesh = new THREE.Mesh(blueBuffgeometry, blueMaterial)
 scene.add(bluemesh)
 
 //Debug Blue object
-
+const parameters = {
+    blueColor: 0x0000ff,
+    redColor: 0xff0000
+}
 gui.add(bluemesh.position, 'y')
     .min(-2)
     .max(2)
     .step(0.1)
+    .name('Blue Y')
+gui.addColor(parameters, 'blueColor')
+    .onChange(() => {
+        bluemesh.material.color.set(parameters.blueColor)
+    })
+    .name('Blue Color')
+
 
 // Object Red
 const RedBuffGeometry = new THREE.BufferGeometry()
@@ -45,7 +55,7 @@ const RedMaterial = new THREE.MeshBasicMaterial({
 })
 const redPositionsArray = new Float32Array(count * 3 * 3)
 for (let i = 0; i < count * 3 * 3; i++) {
-    redPositionsArray[i] = (Math.random() - 0.5) * 3
+    redPositionsArray[i] = (Math.random() - 0.5) * 2
 
 }
 const redPositionsBuffer = new THREE.BufferAttribute(redPositionsArray, 3)
@@ -59,7 +69,13 @@ gui.add(redMesh.position, 'x')
     .min(-2)
     .max(2)
     .step(0.1)
-
+    .name('Red X')
+gui.add(redMesh, 'visible').name('Red visibility')
+gui.add(redMesh.material, 'wireframe')
+gui.addColor(parameters, 'redColor')
+    .onChange(() => {
+        redMesh.material.color.set(parameters.redColor)
+    })
 // Sizes
 const sizes = {
     width: window.innerWidth,
