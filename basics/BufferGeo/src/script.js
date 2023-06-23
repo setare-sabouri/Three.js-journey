@@ -1,8 +1,23 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
+import gsap from 'gsap'
+
+//Debug
 
 const gui = new dat.GUI()
+const parameters = {
+    blueColor: 0x0000ff,
+    redColor: 0xff0000,
+    spin: () => {
+        gsap.to(bluemesh.rotation,
+            {
+                y: bluemesh.rotation.y + Math.PI * 2,
+                duration: 1
+            }
+        )
+    }
+}
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -31,10 +46,7 @@ const bluemesh = new THREE.Mesh(blueBuffgeometry, blueMaterial)
 scene.add(bluemesh)
 
 //Debug Blue object
-const parameters = {
-    blueColor: 0x0000ff,
-    redColor: 0xff0000
-}
+
 gui.add(bluemesh.position, 'y')
     .min(-2)
     .max(2)
@@ -45,7 +57,7 @@ gui.addColor(parameters, 'blueColor')
         bluemesh.material.color.set(parameters.blueColor)
     })
     .name('Blue Color')
-
+gui.add(parameters, 'spin')
 
 // Object Red
 const RedBuffGeometry = new THREE.BufferGeometry()
