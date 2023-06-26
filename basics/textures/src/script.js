@@ -3,14 +3,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 THREE.ColorManagement.enabled = false
 
-const image = new Image()
-const texture = new THREE.Texture(image)
-
-image.onload = () => {
-    texture.needsUpdate = true
-}
-image.src = './textures/door/color.jpg'
-
+const textureLoader = new THREE.TextureLoader()
+const texture = textureLoader.load('/textures/door/color.jpg')
+console.log(texture);
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
