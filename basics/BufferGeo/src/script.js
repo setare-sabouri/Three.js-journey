@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import gsap from 'gsap'
 
-//Debug
+//Debun  g
 
 const gui = new dat.GUI()
 const parameters = {
@@ -12,7 +12,7 @@ const parameters = {
     spin: () => {
         gsap.to(bluemesh.rotation,
             {
-                y: bluemesh.rotation.y + Math.PI * 2,
+                x: bluemesh.rotation.x + Math.PI * 2,
                 duration: 1
             }
         )
@@ -57,7 +57,7 @@ gui.addColor(parameters, 'blueColor')
         bluemesh.material.color.set(parameters.blueColor)
     })
     .name('Blue Color')
-gui.add(parameters, 'spin')
+gui.add(parameters, 'spin').name('Rotate Blue')
 
 // Object Red
 const RedBuffGeometry = new THREE.BufferGeometry()
