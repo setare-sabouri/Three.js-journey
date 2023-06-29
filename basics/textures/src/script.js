@@ -83,18 +83,28 @@ const textureGrdiant = textureLoader.load('/textures/gradients/5.jpg')
 const shapesMaterial = new THREE.MeshStandardMaterial({
     map: textureWood,
     aoMap: textureAmbient,
-    displacementMap: textureHeight
+    displacementMap: textureHeight,
+    displacementScale: 0.2,
+    metalnessMap: textureMetalness,
+    roughnessMap: textureRougness,
+    normalMap: textureNormal,
+    normalScale: new THREE.Vector2(0.5, 0.5),
+    transparent: true,
+    alphaMap: textureAlpha
+    // wireframe: true
 })
 gui.add(shapesMaterial, 'metalness').min(0).max(1)
 gui.add(shapesMaterial, 'roughness').min(0).max(1)
 gui.add(shapesMaterial, 'aoMapIntensity').min(0).max(5)
-// gui.add(shapesMaterial, 'displacementMap')
+gui.add(shapesMaterial, 'displacementScale').min(0).max(1)
+
+gui.add(shapesMaterial.normalScale, 'x').min(-2).max(2).step(0.1); // Adds a slider for x value
+gui.add(shapesMaterial.normalScale, 'y').min(-2).max(2).step(0.1); // Adds a slider for y value
 
 
-
-const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), shapesMaterial)
+const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 64), shapesMaterial)
 sphere.position.set(-3, 0, 0)
-const plane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), shapesMaterial)
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(3, 3, 20, 20), shapesMaterial)
 const torus = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.2, 16, 32), shapesMaterial)
 torus.position.set(3, 0, 0)
 scene.add(sphere, plane, torus)
@@ -164,7 +174,7 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     //shapes
-    plane.rotation.z = 0.2 * elapsedTime
+    // plane.rotation.z = 0.2 * elapsedTime
     torus.rotation.x = 0.2 * elapsedTime
 
 
