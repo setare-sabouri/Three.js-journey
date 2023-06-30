@@ -33,6 +33,16 @@ const textureMatcaps = textureLoader.load('/textures/matcaps/3.png')
 const textureGrdiant = textureLoader.load('/textures/gradients/5.jpg')
 
 
+//environment 
+const envCubeTexLoader = new THREE.CubeTextureLoader()
+const textureEnv = envCubeTexLoader.load([
+    '/textures/environmentMaps/0/px.jpg',
+    '/textures/environmentMaps/0/nx.jpg',
+    '/textures/environmentMaps/0/py.jpg',
+    '/textures/environmentMaps/0/ny.jpg',
+    '/textures/environmentMaps/0/pz.jpg',
+    '/textures/environmentMaps/0/nz.jpg',
+])
 /**
  * other objects
  */
@@ -82,15 +92,16 @@ const textureGrdiant = textureLoader.load('/textures/gradients/5.jpg')
 
 const shapesMaterial = new THREE.MeshStandardMaterial({
     map: textureWood,
+    metalnessMap: textureMetalness,
+    roughnessMap: textureRougness,
     aoMap: textureAmbient,
     displacementMap: textureHeight,
     displacementScale: 0.2,
-    metalnessMap: textureMetalness,
-    roughnessMap: textureRougness,
     normalMap: textureNormal,
     normalScale: new THREE.Vector2(0.5, 0.5),
     transparent: true,
-    alphaMap: textureAlpha
+    alphaMap: textureAlpha,
+    envMap: textureEnv
     // wireframe: true
 })
 gui.add(shapesMaterial, 'metalness').min(0).max(1)
