@@ -21,8 +21,10 @@ scene.add(axesHelper)
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matCapTexture = textureLoader.load('/textures/matcaps/1.png')
-
+const matCapTexture = textureLoader.load('/textures/matcaps/3.png')
+const MatCapmaterial = new THREE.MeshMatcapMaterial({
+    matcap: matCapTexture
+})
 /**
  * Font setup
  */
@@ -31,8 +33,7 @@ const fontLoader = new FontLoader()
 fontLoader.load(
     '/fonts/helvetiker_regular.typeface.json',
     (font) => {
-        const textGeometry = new TextGeometry(
-            'Setare',
+        const textGeometry = new TextGeometry('Audio',
             {
                 font: font,
                 size: 0.5,
@@ -46,32 +47,30 @@ fontLoader.load(
 
             }
         )
-        // textGeometry.computeBoundingBox()
-        // console.log(textGeometry.boundingBox);
-        // textGeometry.translate(
-        //     - textGeometry.boundingBox.max.x * 0.5,
-        //     - textGeometry.boundingBox.max.y * 0.5,
-        //     - textGeometry.boundingBox.max.z * 0.5
-        // )
         textGeometry.center()
 
-        const textMaterial = new THREE.MeshMatcapMaterial({
-            matcap: matCapTexture
-        })
-        const text = new THREE.Mesh(textGeometry, textMaterial)
+        const text = new THREE.Mesh(textGeometry, MatCapmaterial)
         scene.add(text)
-
-
-
-
     }
-
 )
+
+/**
+ * Objects
+ */
+const donutGeo = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+for (let i = 0; i < 200; i++) {
+    const donut = new THREE.Mesh(donutGeo, MatCapmaterial)
+    donut.position.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15)
+    donut.rotation.set((Math.random() * Math.PI), (Math.random() * Math.PI), (Math.random() * Math.PI))
+    const scale = Math.random()
+    donut.scale.set(scale, scale, scale)
+    scene.add(donut)
+}
 
 /**
  * gui
  */
-gui.add
+
 
 /**
  * Sizes
