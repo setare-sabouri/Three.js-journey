@@ -3,6 +3,44 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+
+
+
+
+//analyser
+
+
+
+let analyser = null;
+const mediaStreamRef = { current: null };
+
+const initializeAnalyser = async () => {
+    try {
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createMediaStreamSource(mediaStream);
+        analyser = audioContext.createAnalyser();
+        source.connect(analyser);
+        mediaStreamRef.current = mediaStream;
+
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+initializeAnalyser();
+
+window.addEventListener('beforeunload', () => {
+    if (analyser) {
+        analyser.context.close();
+    }
+    if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+    }
+});
+
+
+
 THREE.ColorManagement.enabled = false
 /**
  * Base
@@ -21,7 +59,7 @@ scene.add(axesHelper)
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matCapTexture = textureLoader.load('/textures/matcaps/3.png')
+const matCapTexture = textureLoader.load('/textures/matcaps/4.png')
 const MatCapmaterial = new THREE.MeshMatcapMaterial({
     matcap: matCapTexture
 })
@@ -58,15 +96,15 @@ fontLoader.load(
  * Objects
  */
 const donutGeo = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 50; i++) {
     const donut = new THREE.Mesh(donutGeo, MatCapmaterial)
-    donut.position.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15)
+    donut.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10)
     donut.rotation.set((Math.random() * Math.PI), (Math.random() * Math.PI), (Math.random() * Math.PI))
-    const scale = Math.random()
-    donut.scale.set(scale, scale, scale)
+    donut.name = 'donut'
+    // const scale = Math.random()
+    // donut.scale.set(scale, scale, scale)
     scene.add(donut)
 }
-
 /**
  * gui
  */
@@ -97,7 +135,6 @@ window.addEventListener('resize', () => {
 /**
  * Camera
  */
-// Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 1
 camera.position.y = 1
@@ -118,6 +155,30 @@ renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+
+
+
+//
+
+
+const updateDonutScale = () => {
+    if (analyser) {
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(dataArray);
+
+        const donuts = scene.children.filter((child) => child.type === 'Mesh' && child.name === 'donut');
+        const scaleMultiplier = 1; // Adjust this value to control the scaling factor
+        for (let i = 0; i < donuts.length; i++) {
+            const donut = donuts[i];
+            const frequencyValue = dataArray[i % dataArray.length] / 255; // Normalize the frequency value
+
+            const scale = frequencyValue * scaleMultiplier;
+            donut.scale.set(scale, scale, scale);
+        }
+    }
+};
+
+
 /**
  * Animate
  */
@@ -132,8 +193,16 @@ const tick = () => {
     // Render
     renderer.render(scene, camera)
 
+    //
+
+
+    updateDonutScale();
+
+
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 }
 
 tick()
+
+
