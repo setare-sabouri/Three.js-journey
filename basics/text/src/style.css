@@ -1,19 +1,22 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
 html,
-body
-{
+body {
     overflow: hidden;
 }
 
-.webgl
-{
+.webgl {
     position: fixed;
     top: 0;
     left: 0;
     outline: none;
+    z-index: -1;
+}
+
+.audio {
+    z-index: 5;
+    background-color: red;
 }

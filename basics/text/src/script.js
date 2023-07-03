@@ -5,8 +5,6 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 
 
-
-
 //analyser
 
 
@@ -14,20 +12,40 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 let analyser = null;
 const mediaStreamRef = { current: null };
 
+// const initializeAnalyser = async () => {
+//     try {
+//         const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+//         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+//         const source = audioContext.createMediaStreamSource(mediaStream);
+//         analyser = audioContext.createAnalyser();
+//         source.connect(analyser);
+//         mediaStreamRef.current = mediaStream;
+
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// };
+
+
+const audioFileInput = document.getElementById('audio');
+
 const initializeAnalyser = async () => {
     try {
-        const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const source = audioContext.createMediaStreamSource(mediaStream);
+        const audioElement = audioFileInput
+        const source = audioContext.createMediaElementSource(audioElement);
         analyser = audioContext.createAnalyser();
         source.connect(analyser);
-        mediaStreamRef.current = mediaStream;
+        analyser.connect(audioContext.destination);
+        await audioElement.play();
+        mediaStreamRef.current = audioElement;
 
     } catch (error) {
         console.log(error.message);
     }
 };
 
+audioFileInput.addEventListener('change', initializeAnalyser);
 initializeAnalyser();
 
 window.addEventListener('beforeunload', () => {
@@ -95,14 +113,14 @@ fontLoader.load(
 /**
  * Objects
  */
-const donutGeo = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+const donutGeo = new THREE.TorusGeometry(0.5, 0.3, 20, 45)
 for (let i = 0; i < 50; i++) {
     const donut = new THREE.Mesh(donutGeo, MatCapmaterial)
-    donut.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 10)
+    donut.position.set((Math.random() - 0.5) * 15, (Math.random() - 0.5) * 10, ((Math.random() - 0.5) * 15))
     donut.rotation.set((Math.random() * Math.PI), (Math.random() * Math.PI), (Math.random() * Math.PI))
     donut.name = 'donut'
-    // const scale = Math.random()
-    // donut.scale.set(scale, scale, scale)
+    const scale = Math.random()
+    donut.scale.set(scale, scale, scale)
     scene.add(donut)
 }
 /**
@@ -165,16 +183,15 @@ const updateDonutScale = () => {
     if (analyser) {
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(dataArray);
-
         const donuts = scene.children.filter((child) => child.type === 'Mesh' && child.name === 'donut');
-        const scaleMultiplier = 1; // Adjust this value to control the scaling factor
+        const scaleMultiplier = 1;
         for (let i = 0; i < donuts.length; i++) {
             const donut = donuts[i];
             const frequencyValue = dataArray[i % dataArray.length] / 255; // Normalize the frequency value
-
-            const scale = frequencyValue * scaleMultiplier;
+            const scale = (frequencyValue ? (frequencyValue * scaleMultiplier) : 0.5);
             donut.scale.set(scale, scale, scale);
         }
+        console.log(analyser);
     }
 };
 
