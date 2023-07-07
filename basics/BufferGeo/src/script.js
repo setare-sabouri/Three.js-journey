@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import gsap from 'gsap'
 
-//Debun  g
+//Debug
 
 const gui = new dat.GUI()
 const parameters = {
@@ -52,11 +52,15 @@ gui.add(bluemesh.position, 'y')
     .max(2)
     .step(0.1)
     .name('Blue Y')
+
+
 gui.addColor(parameters, 'blueColor')
     .onChange(() => {
         bluemesh.material.color.set(parameters.blueColor)
     })
     .name('Blue Color')
+
+
 gui.add(parameters, 'spin').name('Rotate Blue')
 
 // Object Red
