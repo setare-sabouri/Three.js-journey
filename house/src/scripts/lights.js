@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import { gui } from './lilGui'
-console.log(gui);
 
 export const lightsList = {
     ambientLight: new THREE.AmbientLight('#ffffff', 0.5),

@@ -46,13 +46,7 @@ scene.add(floor)
  * Lights
  */
 // Ambient light
-// gui.add(lightsList.ambientLight, 'intensity').min(0).max(1).step(0.001).name('amb intensity')
 
-
-// gui.add(lightsList.moonLight, 'intensity').min(0).max(1).step(0.001)
-// gui.add(lightsList.moonLight.position, 'x').min(- 5).max(5).step(0.001)
-// gui.add(lightsList.moonLight.position, 'y').min(- 5).max(5).step(0.001)
-// gui.add(lightsList.moonLight.position, 'z').min(- 5).max(5).step(0.001)
 
 scene.add(lightsList.ambientLight)
 scene.add(lightsList.moonLight)
