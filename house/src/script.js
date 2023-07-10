@@ -1,15 +1,15 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as dat from 'lil-gui'
-import { lightsList } from './essentials'
+
+import { lightsList } from './scripts/lights'
 
 THREE.ColorManagement.enabled = false
 
 /**
- * Base
+ * Base 
  */
 // Debug
-export const gui = new dat.GUI()
+
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -46,21 +46,16 @@ scene.add(floor)
  * Lights
  */
 // Ambient light
-gui.add(lightsList.ambientLight, 'intensity').min(0).max(1).step(0.001).name('amb intensity')
-console.log(lightsList.moonLight);
+// gui.add(lightsList.ambientLight, 'intensity').min(0).max(1).step(0.001).name('amb intensity')
+
+
+// gui.add(lightsList.moonLight, 'intensity').min(0).max(1).step(0.001)
+// gui.add(lightsList.moonLight.position, 'x').min(- 5).max(5).step(0.001)
+// gui.add(lightsList.moonLight.position, 'y').min(- 5).max(5).step(0.001)
+// gui.add(lightsList.moonLight.position, 'z').min(- 5).max(5).step(0.001)
 
 scene.add(lightsList.ambientLight)
 scene.add(lightsList.moonLight)
-
-
-// Directional light
-// const moonLight = new THREE.DirectionalLight('#ffffff', 0.5)
-lightsList.moonLight.position.set(4, 5, - 2)
-gui.add(lightsList.moonLight, 'intensity').min(0).max(1).step(0.001)
-gui.add(lightsList.moonLight.position, 'x').min(- 5).max(5).step(0.001)
-gui.add(lightsList.moonLight.position, 'y').min(- 5).max(5).step(0.001)
-gui.add(lightsList.moonLight.position, 'z').min(- 5).max(5).step(0.001)
-
 
 /**
  * Sizes
