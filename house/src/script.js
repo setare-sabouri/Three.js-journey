@@ -1,21 +1,16 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-
 import { lightsList } from './scripts/lights'
-
 THREE.ColorManagement.enabled = false
-
-/**
- * Base 
- */
-// Debug
-
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+
+// lights
+scene.add(lightsList.ambientLight, lightsList.moonLight)
 
 /**
  * Textures
@@ -25,13 +20,14 @@ const textureLoader = new THREE.TextureLoader()
 /**
  * House
  */
-// Temporary sphere
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 32, 32),
-    new THREE.MeshStandardMaterial({ roughness: 0.7 })
+const house = new THREE.Group()
+scene.add(house)
+
+const walls = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshStandardMaterial({ color: 0x00ff00 })
 )
-sphere.position.y = 1
-scene.add(sphere)
+house.add(walls)
 
 // Floor
 const floor = new THREE.Mesh(
@@ -42,17 +38,10 @@ floor.rotation.x = - Math.PI * 0.5
 floor.position.y = 0
 scene.add(floor)
 
-/**
- * Lights
- */
-// Ambient light
 
-
-scene.add(lightsList.ambientLight)
-scene.add(lightsList.moonLight)
 
 /**
- * Sizes
+ * SizeseE
  */
 const sizes = {
     width: window.innerWidth,
