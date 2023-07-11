@@ -19,15 +19,15 @@ scene.add(axesHelper)
 // lights
 scene.add(lightsList.ambientLight, lightsList.moonLight)
 
+//house 
+scene.add(house)
+
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
 
-/**
- * House
- */
-scene.add(house)
+
 
 // Floor
 const floor = new THREE.Mesh(
