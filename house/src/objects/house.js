@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 
+
 export const house = new THREE.Group()
 
 
@@ -27,6 +28,25 @@ door.position.y = 1
 
 const bushGeo = new THREE.SphereGeometry(1, 16, 16)
 const bushMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
-const bush = new THREE.Mesh(bushGeo, bushMaterial)
+const count = 4
+const bush = Array(count)
 
-house.add(walls, roof, door, bush)
+for (let i = 0; i < count; i++) {
+    bush[i] = new THREE.Mesh(bushGeo, bushMaterial);
+    house.add(bush[i])
+}
+
+bush[0].scale.set(0.5, 0.5, 0.5)
+bush[0].position.set(-2, 0.2, 2.6)
+
+bush[1].scale.set(0.25, 0.25, 0.25)
+bush[1].position.set(-1.3, 0.1, 2.7)
+
+bush[2].scale.set(0.5, 0.5, 0.5)
+bush[2].position.set(1.3, 0.2, 2.5)
+
+bush[3].scale.set(0.3, 0.3, 0.3)
+bush[3].position.set(2, 0.1, 2.5)
+
+
+house.add(walls, roof, door)
