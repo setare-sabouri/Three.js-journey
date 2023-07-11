@@ -2,9 +2,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { lightsList } from './scripts/lights'
 import { house } from './objects/house'
+import { graves } from './objects/graves'
 THREE.ColorManagement.enabled = false
-
-
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -19,9 +18,8 @@ scene.add(axesHelper)
 // lights
 scene.add(lightsList.ambientLight, lightsList.moonLight)
 
-//house 
-scene.add(house)
-
+// house + graves
+scene.add(house, graves)
 /**
  * Textures
  */
