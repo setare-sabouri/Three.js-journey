@@ -9,9 +9,12 @@ const grave = Array(count)
 for (let i = 0; i < count; i++) {
     grave[i] = new THREE.Mesh(graveGeo, graveMaterial)
     const angle = Math.random() * Math.PI * 2
-    const x_Circle = Math.sin(angle) * 9
-    const z_Circle = Math.cos(angle) * 6
-    console.log(grave[i]);
+    const radius = 5 + Math.random() * 4.5
+    const x_Circle = Math.sin(angle) * radius
+    const z_Circle = Math.cos(angle) * radius
+    grave[i].rotation.y = Math.random() * 0.9
+    grave[i].rotation.z = Math.random() * 0.2
+
     grave[i].position.set(x_Circle, 0, z_Circle)
     graves.add(grave[i])
 }
