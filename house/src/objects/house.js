@@ -5,7 +5,7 @@ export const house = new THREE.Group()
 
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(5, 3, 5),
-    new THREE.MeshStandardMaterial({ color: 0xeeeeee })
+    new THREE.MeshStandardMaterial({ color: 0xeeeeee, wireframe: true })
 )
 walls.position.y = 3 / 2
 
