@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 
-
 export const house = new THREE.Group()
 
 
@@ -17,11 +16,17 @@ const roof = new THREE.Mesh(
 roof.position.y = 1 + 3
 roof.rotation.y = Math.PI / 4
 
+
 const door = new THREE.Mesh(
     new THREE.PlaneGeometry(1.5, 2),
     new THREE.MeshStandardMaterial({ color: 0x0000ff })
 )
 door.position.z = 2.5 + 0.01
 door.position.y = 1
-house.add(door)
-house.add(walls, roof)
+
+
+const bushGeo = new THREE.SphereGeometry(1, 16, 16)
+const bushMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+const bush = new THREE.Mesh(bushGeo, bushMaterial)
+
+house.add(walls, roof, door, bush)
