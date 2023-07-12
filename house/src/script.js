@@ -15,8 +15,11 @@ const scene = new THREE.Scene()
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
+
 // lights
-scene.add(lightsList.ambientLight, lightsList.moonLight)
+const pointLightHelper = new THREE.PointLightHelper(lightsList.doorLight, 1);
+
+scene.add(lightsList.ambientLight, lightsList.moonLight, lightsList.doorLight, pointLightHelper)
 
 // house + graves
 scene.add(house, graves)
