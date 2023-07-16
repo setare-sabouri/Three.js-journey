@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { lightsList } from './lightsSys/lights'
 import { house } from './objects/house'
 import { graves } from './objects/graves'
-
+import { textureList } from './textures/texture'
 THREE.ColorManagement.enabled = false
 
 // Canvas
@@ -31,18 +31,14 @@ scene.add(house, graves)
  */
 const textureLoader = new THREE.TextureLoader()
 
-
-
 // Floor
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20),
+    new THREE.PlaneGeometry(30, 30),
     new THREE.MeshStandardMaterial({ color: '#a9c388' })
 )
 floor.rotation.x = - Math.PI * 0.5
 floor.position.y = 0
 scene.add(floor)
-
-
 
 /**
  * SizeseE
@@ -89,7 +85,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
+renderer.setClearColor(0x262837)
 /**
  * Animate
  */
@@ -109,3 +105,5 @@ const tick = () => {
 }
 
 tick()
+
+

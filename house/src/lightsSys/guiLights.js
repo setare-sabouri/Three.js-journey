@@ -1,12 +1,10 @@
 import * as dat from 'lil-gui'
 import { lightsList } from './lights'
-
 const guiLights = new dat.GUI()
 
 guiLights.domElement.style.right = '0%'
 const parameters = {
-    blueColor: 0x0000ff,
-    fogColor: 0xffffff
+    blueColor: 0x0000ff
 }
 
 guiLights.add(lightsList.ambientLight, 'intensity').min(0).max(1).step(0.001).name('ambient light intensity')
@@ -22,8 +20,3 @@ guiLights.addColor(parameters, 'blueColor')
     .name('Door light')
 
 
-guiLights.addColor(parameters, 'fogColor')
-    .onChange(() => {
-        lightsList.fog.color.set(parameters.fogColor)
-    })
-    .name('fog color')
