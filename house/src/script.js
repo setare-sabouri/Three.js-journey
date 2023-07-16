@@ -18,10 +18,12 @@ scene.add(axesHelper)
 
 
 // lights
-const pointLightHelper = new THREE.PointLightHelper(lightsList.doorLight, 1);
+// const pointLightHelper = new THREE.PointLightHelper(lightsList.doorLight, 1);
+// scene.add(pointLightHelper)
 
-scene.add(lightsList.ambientLight, lightsList.moonLight, lightsList.doorLight, pointLightHelper)
 
+scene.add(lightsList.ambientLight, lightsList.moonLight, lightsList.doorLight)
+scene.fog = lightsList.fog
 // house + graves
 scene.add(house, graves)
 /**
