@@ -23,3 +23,18 @@ export const textureList = {
     textureAmbient: textureLoader.load('/textures/door/ambientOcclusion.jpg'),
     textureNormal: textureLoader.load('/textures/door/normal.jpg')
 }
+
+
+export const wallTextures = {
+    colorMap: textureLoader.load('/textures/bricks/color.jpg'),
+    ambientMap: textureLoader.load('/textures/bricks/ambientOcclusion.jpg'),
+    normalMap: textureLoader.load('/textures/bricks/normal.jpg'),
+    roughnessMap: textureLoader.load('/textures/bricks/roughness.jpg')
+}
+
+export const grassTextures = {
+    colorMap: textureLoader.load('/textures/grass/color.jpg'),
+    ambientMap: textureLoader.load('/textures/grass/ambientOcclusion.jpg'),
+    normalMap: textureLoader.load('/textures/grass/normal.jpg'),
+    roughnessMap: textureLoader.load('/textures/grass/roughness.jpg')
+}
