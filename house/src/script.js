@@ -1,8 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { lightsList } from './scripts/lights'
+import { lightsList } from './lightsSys/lights'
 import { house } from './objects/house'
 import { graves } from './objects/graves'
+
 THREE.ColorManagement.enabled = false
 
 // Canvas
