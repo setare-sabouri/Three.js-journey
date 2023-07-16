@@ -1,7 +1,7 @@
 import * as THREE from 'three'
+import { textureList } from '../textures/texture'
 
 export const house = new THREE.Group()
-
 
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(5, 3, 5),
@@ -18,9 +18,21 @@ roof.rotation.y = Math.PI / 4
 
 
 const door = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.5, 2),
-    new THREE.MeshStandardMaterial({ color: 0x9900ee })
+    new THREE.PlaneGeometry(1.9, 2, 100, 100),
+    new THREE.MeshStandardMaterial({
+        map: textureList.textureWood,
+        transparent: true,
+        alphaMap: textureList.textureAlpha,
+        aoMap: textureList.textureAmbient,
+        displacementMap: textureList.textureHeight,
+        displacementScale: 0.1,
+        normalMap: textureList.textureNormal,
+        roughness: textureList.textureRougness,
+        // metalness: textureList.textureMetalness,
+
+    })
 )
+door.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(door.geometry.attributes.uv.array, 2))
 door.position.z = 2.5 + 0.01
 door.position.y = 1
 

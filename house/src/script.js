@@ -3,7 +3,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { lightsList } from './lightsSys/lights'
 import { house } from './objects/house'
 import { graves } from './objects/graves'
-import { textureList } from './textures/texture'
 THREE.ColorManagement.enabled = false
 
 // Canvas
@@ -12,24 +11,16 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-//axes
+// axes
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
-
 // lights
-// const pointLightHelper = new THREE.PointLightHelper(lightsList.doorLight, 1);
-// scene.add(pointLightHelper)
-
 
 scene.add(lightsList.ambientLight, lightsList.moonLight, lightsList.doorLight)
 scene.fog = lightsList.fog
 // house + graves
 scene.add(house, graves)
-/**
- * Textures
- */
-const textureLoader = new THREE.TextureLoader()
 
 // Floor
 const floor = new THREE.Mesh(

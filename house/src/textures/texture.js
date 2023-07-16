@@ -22,5 +22,4 @@ export const textureList = {
     textureRougness: textureLoader.load('/textures/door/roughness.jpg'),
     textureAmbient: textureLoader.load('/textures/door/ambientOcclusion.jpg'),
     textureNormal: textureLoader.load('/textures/door/normal.jpg')
-
 }
