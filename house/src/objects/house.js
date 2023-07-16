@@ -1,7 +1,23 @@
 import * as THREE from 'three'
-import { textureList, wallTextures } from '../textures/texture'
+import { textureList, wallTextures, grassTextures } from '../textures/texture'
 
 export const house = new THREE.Group()
+
+
+const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(30, 30, 50, 50),
+    new THREE.MeshStandardMaterial({
+        map: grassTextures.colorMap,
+        aoMap: grassTextures.ambientMap,
+        normalMap: grassTextures.normalMap,
+        roughness: grassTextures.roughnessMap
+    })
+)
+
+
+floor.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(floor.geometry.attributes.uv.array, 2))
+floor.rotation.x = - Math.PI * 0.5
+floor.position.y = 0.1
 
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(5, 3, 5),
@@ -13,7 +29,6 @@ const walls = new THREE.Mesh(
     })
 )
 walls.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(walls.geometry.attributes.uv.array, 2))
-
 walls.position.y = 3 / 2
 
 const roof = new THREE.Mesh(
@@ -67,4 +82,4 @@ bush[3].scale.set(0.3, 0.3, 0.3)
 bush[3].position.set(2, 0.1, 2.5)
 
 
-house.add(walls, roof, door)
+house.add(floor, walls, roof, door)

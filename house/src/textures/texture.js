@@ -38,3 +38,21 @@ export const grassTextures = {
     normalMap: textureLoader.load('/textures/grass/normal.jpg'),
     roughnessMap: textureLoader.load('/textures/grass/roughness.jpg')
 }
+
+grassTextures.colorMap.repeat.set(5, 5)
+grassTextures.colorMap.wrapS = THREE.RepeatWrapping
+grassTextures.colorMap.wrapT = THREE.RepeatWrapping
+
+grassTextures.ambientMap.repeat.set(5, 5)
+grassTextures.ambientMap.wrapS = THREE.RepeatWrapping
+grassTextures.ambientMap.wrapT = THREE.RepeatWrapping
+
+
+grassTextures.normalMap.repeat.set(5, 5)
+grassTextures.normalMap.wrapS = THREE.RepeatWrapping
+grassTextures.normalMap.wrapT = THREE.RepeatWrapping
+
+
+grassTextures.roughnessMap.repeat.set(5, 5)
+grassTextures.roughnessMap.wrapS = THREE.RepeatWrapping
+grassTextures.roughnessMap.wrapT = THREE.RepeatWrapping
