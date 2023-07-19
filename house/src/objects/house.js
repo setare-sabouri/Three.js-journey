@@ -5,12 +5,14 @@ export const house = new THREE.Group()
 
 
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(30, 30, 50, 50),
+    new THREE.PlaneGeometry(30, 30, 100, 100),
     new THREE.MeshStandardMaterial({
         map: grassTextures.colorMap,
         aoMap: grassTextures.ambientMap,
         normalMap: grassTextures.normalMap,
-        roughness: grassTextures.roughnessMap
+        roughness: grassTextures.roughnessMap,
+        displacementMap: grassTextures.height,
+        displacementScale: 0.5,
     })
 )
 

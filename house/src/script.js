@@ -19,17 +19,12 @@ scene.add(axesHelper)
 
 scene.add(lightsList.ambientLight, lightsList.moonLight, lightsList.doorLight)
 scene.fog = lightsList.fog
+scene.add(lightsList.ghost1, lightsList.ghost2, lightsList.ghost3)
 // house + graves
 scene.add(house, graves)
 
 // Floor
-const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(30, 30),
-    new THREE.MeshStandardMaterial({ color: '#a9c388' })
-)
-floor.rotation.x = - Math.PI * 0.5
-floor.position.y = 0
-scene.add(floor)
+
 
 /**
  * SizeseE
@@ -84,6 +79,9 @@ const clock = new THREE.Clock()
 
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
+
+    lightsList.ghost1.position.x = Math.cos(elapsedTime) * 6
+    lightsList.ghost1.position.z = Math.sin(elapsedTime) * 6
 
     // Update controls
     controls.update()

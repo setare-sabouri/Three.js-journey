@@ -33,10 +33,11 @@ export const wallTextures = {
 }
 
 export const grassTextures = {
-    colorMap: textureLoader.load('/textures/grass/color.jpg'),
-    ambientMap: textureLoader.load('/textures/grass/ambientOcclusion.jpg'),
-    normalMap: textureLoader.load('/textures/grass/normal.jpg'),
-    roughnessMap: textureLoader.load('/textures/grass/roughness.jpg')
+    colorMap: textureLoader.load('/textures/set/color.jpg'),
+    ambientMap: textureLoader.load('/textures/set/ambientOcclusion.jpg'),
+    normalMap: textureLoader.load('/textures/set/normal.jpg'),
+    roughnessMap: textureLoader.load('/textures/set/roughness.jpg'),
+    height: textureLoader.load('/textures/set/height.png')
 }
 
 grassTextures.colorMap.repeat.set(5, 5)
