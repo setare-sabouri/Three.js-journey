@@ -4,19 +4,25 @@ const guiLights = new dat.GUI()
 
 guiLights.domElement.style.right = '0%'
 const parameters = {
-    blueColor: 0x0000ff
+    doorColor: 0x653920,
+    fogColor: 0x5c5a6d
 }
 
 guiLights.add(lightsList.ambientLight, 'intensity').min(0).max(1).step(0.001).name('ambient light intensity')
-guiLights.add(lightsList.moonLight, 'intensity').min(0).max(1).step(0.001).name('Drctnal light intensity')
-guiLights.add(lightsList.moonLight.position, 'x').min(- 5).max(5).step(0.001).name('Drctnal light X')
-guiLights.add(lightsList.moonLight.position, 'y').min(- 5).max(5).step(0.001).name('Drctnal light Y')
-guiLights.add(lightsList.moonLight.position, 'z').min(- 5).max(5).step(0.001).name('Drctnal light Z')
+guiLights.add(lightsList.moonLight, 'intensity').min(0).max(1).step(0.001).name('moon light intensity')
 
-guiLights.addColor(parameters, 'blueColor')
+
+guiLights.addColor(parameters, 'doorColor')
     .onChange(() => {
-        lightsList.doorLight.color.set(parameters.blueColor)
+        lightsList.doorLight.color.set(parameters.doorColor)
     })
     .name('Door light')
+
+
+guiLights.addColor(parameters, 'fogColor')
+    .onChange(() => {
+        lightsList.fog.color.set(parameters.fogColor)
+    })
+    .name('Fog')
 
 

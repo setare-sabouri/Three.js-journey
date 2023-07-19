@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { lightsList } from './lightsSys/lights'
 import { house } from './objects/house'
 import { graves } from './objects/graves'
+import { ghostsCircle } from './objects/ghosts'
 THREE.ColorManagement.enabled = false
 
 // Canvas
@@ -22,33 +23,15 @@ scene.fog = lightsList.fog
 scene.add(lightsList.ghost1, lightsList.ghost2, lightsList.ghost3)
 // house + graves
 scene.add(house, graves)
-// const pointLightHelper = new THREE.PointLightHelper(lightsList.ghost3, 1);
-// scene.add(pointLightHelper)
+
 // Floor
 
 
-/**
- * SizeseE
- */
+
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
-
-window.addEventListener('resize', () => {
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
-
 /**
  * Camera
  */
@@ -66,35 +49,38 @@ controls.enableDamping = true
 /**
  * Renderer
  */
+
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor(0x262837)
+renderer.setClearColor(0x23222a)
+
+/**
+ * SizeseE
+ */
+
+window.addEventListener('resize', () => {
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+
+
 /**
  * Animate
  */
-const clock = new THREE.Clock()
-
-const ghostsCircle = () => {
-    const elapsedTime = clock.getElapsedTime()
-
-    lightsList.ghost1.position.x = Math.cos(elapsedTime * 0.9) * 6 //avali sorat , dovomi shoa
-    lightsList.ghost1.position.z = Math.sin(elapsedTime * 0.9) * 6
-    lightsList.ghost1.position.y = Math.sin(elapsedTime * 4)
-
-
-    lightsList.ghost2.position.x = Math.cos(-elapsedTime * 1.2) * 5 //abi
-    lightsList.ghost2.position.z = Math.sin(-elapsedTime * 1.2) * 5
-    lightsList.ghost2.position.y = Math.sin(-elapsedTime * 5) + 0.5
-
-
-    lightsList.ghost3.position.x = Math.cos(elapsedTime * 1.5) * 8 //zard
-    lightsList.ghost3.position.z = Math.sin(elapsedTime * 1.5) * 8
-    lightsList.ghost3.position.y = Math.sin(elapsedTime * 2) + 1.5
-}
 
 const tick = () => {
     ghostsCircle()
