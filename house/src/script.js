@@ -22,7 +22,8 @@ scene.fog = lightsList.fog
 scene.add(lightsList.ghost1, lightsList.ghost2, lightsList.ghost3)
 // house + graves
 scene.add(house, graves)
-
+// const pointLightHelper = new THREE.PointLightHelper(lightsList.ghost3, 1);
+// scene.add(pointLightHelper)
 // Floor
 
 
@@ -77,12 +78,26 @@ renderer.setClearColor(0x262837)
  */
 const clock = new THREE.Clock()
 
-const tick = () => {
+const ghostsCircle = () => {
     const elapsedTime = clock.getElapsedTime()
 
-    lightsList.ghost1.position.x = Math.cos(elapsedTime) * 6
-    lightsList.ghost1.position.z = Math.sin(elapsedTime) * 6
+    lightsList.ghost1.position.x = Math.cos(elapsedTime * 0.9) * 6 //avali sorat , dovomi shoa
+    lightsList.ghost1.position.z = Math.sin(elapsedTime * 0.9) * 6
+    lightsList.ghost1.position.y = Math.sin(elapsedTime * 4)
 
+
+    lightsList.ghost2.position.x = Math.cos(-elapsedTime * 1.2) * 5 //abi
+    lightsList.ghost2.position.z = Math.sin(-elapsedTime * 1.2) * 5
+    lightsList.ghost2.position.y = Math.sin(-elapsedTime * 5) + 0.5
+
+
+    lightsList.ghost3.position.x = Math.cos(elapsedTime * 1.5) * 8 //zard
+    lightsList.ghost3.position.z = Math.sin(elapsedTime * 1.5) * 8
+    lightsList.ghost3.position.y = Math.sin(elapsedTime * 2) + 1.5
+}
+
+const tick = () => {
+    ghostsCircle()
     // Update controls
     controls.update()
 
@@ -94,5 +109,6 @@ const tick = () => {
 }
 
 tick()
+
 
 

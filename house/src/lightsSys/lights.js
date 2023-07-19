@@ -14,4 +14,4 @@ lightsList.doorLight.position.set(0, 3, 2.9)
 
 lightsList.moonLight.position.set(4, 5, - 2)
 
-lightsList.ghost1.position.set(0, 0.5, 0)
+lightsList.ghost1.position.set(5, 3, 4)
