@@ -57,7 +57,7 @@ renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor(0x23222a)
-
+renderer.shadowMap.enabled = true
 /**
  * SizeseE
  */

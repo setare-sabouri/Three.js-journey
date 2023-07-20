@@ -13,5 +13,3 @@ export const lightsList = {
 lightsList.doorLight.position.set(0, 3, 2.9)
 
 lightsList.moonLight.position.set(5, 5, 2)
-
-lightsList.ghost1.position.set(5, 3, 4)
