@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { textureList } from '../textures'
 
 const count = 500 //particles number 
 
@@ -6,7 +7,6 @@ const positions = new Float32Array(count * 3) // Multiply by 3 because each posi
 
 for (let i = 0; i < count * 3; i++) {
     positions[i] = (Math.random() - 0.5) * 10
-    console.log((Math.random() - 0.5) * 10);
 }
 
 
@@ -16,8 +16,12 @@ particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 
 export const particle = new THREE.Points(
     particlesGeometry,
     new THREE.PointsMaterial({
-        color: 0xff0000,
-        size: 0.05,
-        sizeAttenuation: true
+        color: 0xccff66,
+        size: 0.5,
+        sizeAttenuation: true,
+        transparent: true,
+        alphaMap: textureList.heartTextur,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
     })
 )

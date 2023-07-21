@@ -10,11 +10,6 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-/**
- * Textures
- */
-const textureLoader = new THREE.TextureLoader()
-
 //objects
 scene.add(particle)
 
@@ -61,7 +56,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
+// renderer.setClearColor(0x456666)
 /**
  * Animate
  */
