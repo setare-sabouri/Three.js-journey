@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { particle } from './objects/paticles'
+import { particle, particlesGeometry, countParticles } from './objects/paticles'
 THREE.ColorManagement.enabled = false
 
 
@@ -65,6 +65,13 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
+    for (let i = 0; i < countParticles; i++) {
+        const i3 = i * 3
+        const x = particlesGeometry.attributes.position.array[i3]
+        particlesGeometry.attributes.position.array[i3 + 1] = Math.sin(elapsedTime + x)
+
+    }
+    particlesGeometry.attributes.position.needsUpdate = true
     // Update controls
     controls.update()
 
