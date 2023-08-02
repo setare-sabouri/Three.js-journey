@@ -53,9 +53,21 @@ renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-//objects 
-scene.add(galaxyPack.galaxy)
+//lllllll
+async function checkGalaxy() {
+    while (!galaxyPack.galaxy) {
+        await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for 100 milliseconds
+    }
 
+    console.log("yes");
+}
+
+galaxyPack.galaxyGenerator();
+checkGalaxy();
+
+export const updateGalaxy = () => {
+    console.log("object");
+}
 /**
  * Animate
  */

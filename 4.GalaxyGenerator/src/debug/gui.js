@@ -1,9 +1,7 @@
 import * as dat from 'lil-gui'
-import { galaxyPack, galaxyParameters } from '../objects/galaxy'
-
+import { galaxyParameters } from '../objects/galaxy'
+import { updateGalaxy } from '../script'
 const gui = new dat.GUI()
 
-const text = () => {
-    console.log(galaxyParameters.count);
-}
-gui.add(galaxyParameters, 'count').min(100).max(1000).step(50).onFinishChange(galaxyPack.updateGalaxy)
+
+gui.add(galaxyParameters, 'count').min(50).max(1000).step(50).onFinishChange(updateGalaxy)

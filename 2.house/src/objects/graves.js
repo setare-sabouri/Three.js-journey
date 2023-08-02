@@ -19,3 +19,15 @@ for (let i = 0; i < count; i++) {
     graves.add(grave[i])
 }
 
+
+
+export const updateGravesScaleY = (dataArray) => {
+    if (!dataArray || dataArray.length === 0) return;
+
+    const scaleYFactor = 0.5; // You can adjust this factor based on how much you want the graves to scale
+
+    for (let i = 0; i < count; i++) {
+        const scaleY = dataArray[i % dataArray.length] / 256 * scaleYFactor + 1; // Scale based on audio data
+        grave[i].scale.y = scaleY;
+    }
+};

@@ -7,9 +7,16 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div id="controlBar" style="display: block">
+      <input type="file" id="audioFileInput" accept="audio/*" />
+      <audio id="audioPlayer" controls>
+        <source id="audioSource" src="" type="audio/mpeg" />
+      </audio>
+    </div>
     <canvas class="webgl"></canvas>
     <script type="module" src="./script.js"></script>
     <script type="module" src="./lightsSys/lights.js"></script>
     <script type="module" src="./lightsSys/guiLights.js"></script>
+    <script type="module" src="./analyser.js"></script>
   </body>
 </html>

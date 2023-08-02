@@ -26,8 +26,6 @@ scene.add(house, graves)
 
 // Floor
 
-
-
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
