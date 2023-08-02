@@ -19,4 +19,6 @@ export const ghostsCircle = () => {
     lightsList.ghost3.position.x = Math.cos(elapsedTime * 1.5) * 8 //zard
     lightsList.ghost3.position.z = Math.sin(elapsedTime * 1.5) * 8
     lightsList.ghost3.position.y = Math.sin(elapsedTime * 2) + Math.sin(elapsedTime * 4) + 1.5
+
+
 }

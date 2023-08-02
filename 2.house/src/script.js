@@ -1,13 +1,17 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { lightsList } from './lightsSys/lights'
-import { house } from './objects/house'
+import { house, houseElement } from './objects/house'
 import { graves } from './objects/graves'
 import { ghostsCircle } from './objects/ghosts'
+
+
 THREE.ColorManagement.enabled = false
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
+
+
 
 // Scene
 const scene = new THREE.Scene()
@@ -74,11 +78,13 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+houseElement.appendChild(renderer.domElement);
 
 
 /**
  * Animate
  */
+
 
 const tick = () => {
     ghostsCircle()
