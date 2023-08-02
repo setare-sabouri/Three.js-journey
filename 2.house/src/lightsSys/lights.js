@@ -3,7 +3,7 @@ import * as THREE from 'three'
 export const lightsList = {
     ambientLight: new THREE.AmbientLight('#cbc9ee', 0.5),
     moonLight: new THREE.DirectionalLight('#1386d8', 0.4),
-    doorLight: new THREE.PointLight(0x653920, 5),
+    doorLight: new THREE.PointLight(0xa5836f, 5),
     ghost1: new THREE.PointLight('#ff00ff', 2, 3),
     ghost2: new THREE.PointLight('#00ffff', 2, 3),
     ghost3: new THREE.PointLight('#ffff00', 2, 3),

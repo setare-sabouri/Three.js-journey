@@ -3,7 +3,7 @@ import * as THREE from 'three'
 export const graves = new THREE.Group()
 
 const graveGeo = new THREE.BoxGeometry(1, 3, 0.3)
-const graveMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa })
+const graveMaterial = new THREE.MeshStandardMaterial({ color: 0x53463c })
 const count = 50
 const grave = Array(count)
 for (let i = 0; i < count; i++) {

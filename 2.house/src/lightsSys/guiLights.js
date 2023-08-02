@@ -4,7 +4,7 @@ const guiLights = new dat.GUI()
 
 guiLights.domElement.style.right = '0%'
 const parameters = {
-    doorColor: 0x653920,
+    doorColor: 0xa5836f,
     fogColor: 0x5c5a6d
 }
 
