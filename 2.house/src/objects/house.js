@@ -1,8 +1,5 @@
 import * as THREE from 'three'
 import { textureList, wallTextures, grassTextures } from '../textures/texture'
-import gsap from 'gsap';
-import { graves } from './graves';
-
 export const house = new THREE.Group()
 
 
@@ -29,7 +26,8 @@ const walls = new THREE.Mesh(
         map: wallTextures.colorMap,
         aoMap: wallTextures.ambientMap,
         normalMap: wallTextures.normalMap,
-        roughness: wallTextures.roughnessMap
+        roughness: wallTextures.roughnessMap,
+        name: 'walls'
     })
 )
 walls.geometry.setAttribute('uv2', new THREE.Float32BufferAttribute(walls.geometry.attributes.uv.array, 2))
@@ -66,36 +64,7 @@ door.position.y = 1
 house.userData.isClickable = true;
 
 export const houseElement = document.createElement('div');
-houseElement.classList.add('interactive-object');
 document.body.appendChild(houseElement);
-
-
-const scaleGraves = () => {
-    graves.children.forEach((grave, index) => {
-        gsap.to(grave.scale, { duration: 1, x: 1.2, y: 1.2, z: 1.2, ease: 'power2.out', delay: index * 0.2 });
-    });
-};
-
-const resetGraveScales = () => {
-    graves.children.forEach((grave, index) => {
-        gsap.to(grave.scale, { duration: 1, x: 1, y: 1, z: 1, ease: 'power2.out', delay: index * 0.2 });
-    });
-};
-
-houseElement.addEventListener('click', () => {
-    console.log('House clicked');
-    scaleGraves(); // Scale all the graves
-
-    const animationDuration = 1; // Duration of the scale animation
-    const animationDelay = graves.children.length * 0.2; // Delay after which resetGraveScales will be called
-    gsap.delayedCall(animationDuration + animationDelay, resetGraveScales);
-
-})
-
-
-
-
-
 
 
 

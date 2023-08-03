@@ -1,15 +1,13 @@
-//analyser
 
-
+import { updateGravesScaleY } from "./objects/graves";
 export let analyser = null;
 const mediaStreamRef = { current: null };
 
-
-//---------------------------audio-----------------------------
+//---------------------------audio-setup-----------------------------
 const audioFileInput = document.getElementById('audioFileInput');
 const audioPlayer = document.getElementById('audioPlayer');
 const audioSource = document.getElementById('audioSource');
-import { updateGravesScaleY } from "./objects/graves";
+
 audioFileInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     const fileURL = URL.createObjectURL(file);
@@ -17,8 +15,8 @@ audioFileInput.addEventListener('change', (event) => {
     audioPlayer.load();
     initializeAnalyser()
 });
-//--------------------------------------------------------------
 
+//-------------------------analyser-setup------------------------
 
 export const initializeAnalyser = async () => {
     try {
@@ -30,13 +28,13 @@ export const initializeAnalyser = async () => {
         analyser.connect(audioContext.destination);
         await audioElement.play();
         mediaStreamRef.current = audioElement;
-        //-----------
+        //----audio data-----
         const bufferLength = analyser.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
 
         const updateGraves = () => {
             analyser.getByteFrequencyData(dataArray);
-            updateGravesScaleY(dataArray); // Call the function in graves.js to update the graves' scaleY
+            updateGravesScaleY(dataArray); // Calls the function in graves.js to update the graves' scaleY
             requestAnimationFrame(updateGraves);
         };
         updateGraves();
