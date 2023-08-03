@@ -1,3 +1,3 @@
 # Three.js Journey
 
-# [Demo](https://three-js-journey-blond.vercel.app/)
+# [Demo](https://interactivehouse.vercel.app/)
